@@ -32,8 +32,21 @@ Example Responses:
 
 Add the required logic below to complete the API.
 */
-
-const PORT = 3000;
-app.listen(PORT, () => {
+app.get("/assistant/greet", (req, res) => {
+  const { name } = req.query;
+  console.log(req.query);
+  const dates = new Date();
+  const days = dates.getDay();
+  let message = `Hello, ${name}! Welcome to our assistant app!\n`;
+  if (days == 1) {
+    message += "Happy Monday! Start your week with energy!";
+  } else if (days == 5) {
+    message += "It's Friday! The weekend is near!";
+  } else {
+    message += "Have a wonderful day!";
+  }
+  res.send(message);
+});
+app.listen('3000', () => {
     console.log(`Virtual Assistant API is running on http://localhost:${PORT}`);
 });
